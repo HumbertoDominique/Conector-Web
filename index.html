@@ -18,7 +18,20 @@
 
       myConnector.getSchema = function (schemaCallback) {
          // Definir la estructura del esquema aquí
-         schemaCallback([]);
+         var cols = [
+      // Definir las columnas del esquema aquí
+      { id: "columna1", alias: "Nombre_Columna_1", dataType: tableau.dataTypeEnum.string },
+      { id: "columna2", alias: "Nombre_Columna_2", dataType: tableau.dataTypeEnum.int },
+      // ... agregar más columnas según sea necesario
+   ];
+
+   var tableInfo = {
+      id: "nombreTabla",
+      alias: "Alias_de_la_Tabla",
+      columns: cols
+   };
+
+   schemaCallback([tableInfo]);
       };
 
       myConnector.getData = function (table, doneCallback) {
