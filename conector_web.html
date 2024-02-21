@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Conector Web</title>
+   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+   <script src="https://connectors.tableau.com/libs/tableauwdc-2.3.latest.js"></script>
+</head>
+<body>
+   <script>
+// Lógica del conector web
+
+   (function () {
+      var myConnector = tableau.makeConnector();
+
+      myConnector.init = function(initCallback) {
+         // Inicialización necesaria
+         initCallback();
+      };
+
+     myConnector.getSchema = function (schemaCallback) {
+   // Definir las columnas del esquema aquí
+   var cols = [
+      { id: "ProyectoId", alias: "ProyectoId", dataType: tableau.dataTypeEnum.int },
+      { id: "Codigo", alias: "Codigo", dataType: tableau.dataTypeEnum.string },
+      { id: "CodigoFreshServices", alias: "CodigoFreshServices", dataType: tableau.dataTypeEnum.string },
+      { id: "Nombre", alias: "Nombre", dataType: tableau.dataTypeEnum.string },
+      { id: "Nivel", alias: "Nivel", dataType: tableau.dataTypeEnum.string },
+      { id: "Gerencia", alias: "Gerencia", dataType: tableau.dataTypeEnum.string },
+      { id: "Proceso", alias: "Proceso", dataType: tableau.dataTypeEnum.string },
+      { id: "SubProceso", alias: "SubProceso", dataType: tableau.dataTypeEnum.string },
+      { id: "RiesgoIdentificado", alias: "RiesgoIdentificado", dataType: tableau.dataTypeEnum.string },
+      { id: "Descripcion", alias: "Descripcion", dataType: tableau.dataTypeEnum.string },
+      { id: "NivelImpacto", alias: "NivelImpacto", dataType: tableau.dataTypeEnum.string },
+      { id: "JustificacionImpacto", alias: "JustificacionImpacto", dataType: tableau.dataTypeEnum.string },
+      { id: "ResponsableProceso", alias: "ResponsableProceso", dataType: tableau.dataTypeEnum.string },
+      { id: "ResponsableRiesgo", alias: "ResponsableRiesgo", dataType: tableau.dataTypeEnum.string },
+      { id: "FechaInicio", alias: "FechaInicio", dataType: tableau.dataTypeEnum.date },
+      { id: "FechaTermino", alias: "FechaTermino", dataType: tableau.dataTypeEnum.date },
+      { id: "EstadoEvento", alias: "EstadoEvento", dataType: tableau.dataTypeEnum.string },
+      { id: "Calificacion", alias: "Calificacion", dataType: tableau.dataTypeEnum.string },
+   ];
+
+   // Definir la información de la tabla con las columnas
+   var tableInfo = {
+      id: "Eventos",
+      alias: "Eventos",
+      columns: cols
+   };
+
+   // Llamar a schemaCallback con un array que contiene la información de la tabla
+   schemaCallback([tableInfo]);
+};
+
+      myConnector.getData = function (table, doneCallback) {
+   console.log("getData iniciado");
+
+   // Realizar la solicitud de datos y procesar la respuesta aquí
+   var apiUrl = "https://multicaja-dev.outsystemsenterprise.com/OPPortalCore/rest/V1/EventRiskListByProgramId?ProgramaId=6&OrganizacionId=4";
+
+   // Realizar la solicitud GET a la API
+   $.ajax({
+      url: apiUrl,
+      type: "GET",
+      dataType: "json",
+      success: function (data) {
+         console.log("Datos obtenidos:", data);
+
+         // Procesar los datos y enviarlos a Tableau
+         doneCallback(data);
+      },
+      error: function (xhr, textStatus, errorThrown) {
+         // Manejar errores
+         console.error("Error en la solicitud:", textStatus, errorThrown);
+         doneCallback([]);
+      }
+   });
+};
+
+      tableau.registerConnector(myConnector);
+
+      // Iniciar el conector web
+      $(document).ready(function () {
+         $("#submitButton").click(function () {
+            tableau.connectionName = "conector_web";
+            tableau.submit();
+         });
+      });
+   })();
+</script>
+
+<!-- Puedes agregar un formulario simple para la entrada de parámetros si es necesario -->
+<form>
+   <!-- Campos del formulario aquí -->
+   <button id="submitButton">Obtener Datos</button>
+</form>
+   </script>
+</body>
+</html>
