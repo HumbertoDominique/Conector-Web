@@ -17,22 +17,23 @@
       };
 
       myConnector.getSchema = function (schemaCallback) {
-         // Definir la estructura del esquema aquí
-         var cols = [
-      // Definir las columnas del esquema aquí
+   // Definir las columnas del esquema aquí
+   var cols = [
       { id: "columna1", alias: "Nombre_Columna_1", dataType: tableau.dataTypeEnum.string },
       { id: "columna2", alias: "Nombre_Columna_2", dataType: tableau.dataTypeEnum.int },
       // ... agregar más columnas según sea necesario
    ];
 
+   // Definir la información de la tabla con las columnas
    var tableInfo = {
       id: "nombreTabla",
       alias: "Alias_de_la_Tabla",
       columns: cols
    };
 
+   // Llamar a schemaCallback con un array que contiene la información de la tabla
    schemaCallback([tableInfo]);
-      };
+};
 
       myConnector.getData = function (table, doneCallback) {
          // Realizar la solicitud de datos y procesar la respuesta aquí
