@@ -16,18 +16,43 @@
          initCallback();
       };
 
-      myConnector.getSchema = function (schemaCallback) {
+     myConnector.getSchema = function (schemaCallback) {
    // Definir las columnas del esquema aquí
    var cols = [
-      { id: "columna1", alias: "Nombre_Columna_1", dataType: tableau.dataTypeEnum.string },
-      { id: "columna2", alias: "Nombre_Columna_2", dataType: tableau.dataTypeEnum.int },
-      // ... agregar más columnas según sea necesario
+      { id: "ProyectoId", alias: "ProyectoId", dataType: tableau.dataTypeEnum.int },
+      { id: "Codigo", alias: "Codigo", dataType: tableau.dataTypeEnum.string },
+      { id: "CodigoFreshServices", alias: "CodigoFreshServices", dataType: tableau.dataTypeEnum.string },
+      { id: "Nombre", alias: "Nombre", dataType: tableau.dataTypeEnum.string },
+      { id: "Nivel", alias: "Nivel", dataType: tableau.dataTypeEnum.string },
+      { id: "Gerencia", alias: "Gerencia", dataType: tableau.dataTypeEnum.string },
+      { id: "Proceso", alias: "Proceso", dataType: tableau.dataTypeEnum.string },
+      { id: "SubProceso", alias: "SubProceso", dataType: tableau.dataTypeEnum.string },
+      { id: "RiesgoIdentificado", alias: "RiesgoIdentificado", dataType: tableau.dataTypeEnum.string },
+      { id: "Descripcion", alias: "Descripcion", dataType: tableau.dataTypeEnum.string },
+      { id: "URLAConfluence", alias: "URLAConfluence", dataType: tableau.dataTypeEnum.string },
+      { id: "URLAJIRA", alias: "URLAJIRA", dataType: tableau.dataTypeEnum.string },
+      { id: "NivelImpacto", alias: "NivelImpacto", dataType: tableau.dataTypeEnum.string },
+      { id: "JustificacionImpacto", alias: "JustificacionImpacto", dataType: tableau.dataTypeEnum.string },
+      { id: "ResponsableProceso", alias: "ResponsableProceso", dataType: tableau.dataTypeEnum.string },
+      { id: "ResponsableRiesgo", alias: "ResponsableRiesgo", dataType: tableau.dataTypeEnum.string },
+      { id: "FechaInicio", alias: "FechaInicio", dataType: tableau.dataTypeEnum.date },
+      { id: "FechaTermino", alias: "FechaTermino", dataType: tableau.dataTypeEnum.date },
+      { id: "EstadoEvento", alias: "EstadoEvento", dataType: tableau.dataTypeEnum.string },
+      { id: "Calificacion", alias: "Calificacion", dataType: tableau.dataTypeEnum.string },
+      { id: "PorcAvanceEsperadoProyecto", alias: "PorcAvanceEsperadoProyecto", dataType: tableau.dataTypeEnum.float },
+      { id: "PorcAvanceLogradoProyecto", alias: "PorcAvanceLogradoProyecto", dataType: tableau.dataTypeEnum.float },
+      { id: "UserIdCreated", alias: "UserIdCreated", dataType: tableau.dataTypeEnum.int },
+      { id: "DateCreated", alias: "DateCreated", dataType: tableau.dataTypeEnum.datetime },
+      { id: "UserIdUpdated", alias: "UserIdUpdated", dataType: tableau.dataTypeEnum.int },
+      { id: "DateUpdated", alias: "DateUpdated", dataType: tableau.dataTypeEnum.datetime },
+      { id: "MedidaEvitarOcurrencia", alias: "MedidaEvitarOcurrencia", dataType: tableau.dataTypeEnum.string },
+      { id: "RecomendacionesGRiesgo", alias: "RecomendacionesGRiesgo", dataType: tableau.dataTypeEnum.string }
    ];
 
    // Definir la información de la tabla con las columnas
    var tableInfo = {
-      id: "nombreTabla",
-      alias: "Alias_de_la_Tabla",
+      id: "Eventos",
+      alias: "Eventos",
       columns: cols
    };
 
