@@ -36,25 +36,29 @@
 };
 
       myConnector.getData = function (table, doneCallback) {
-         // Realizar la solicitud de datos y procesar la respuesta aquí
-         var apiUrl = "https://multicaja-dev.outsystemsenterprise.com/OPPortalCore/rest/V1/EventRiskListByProgramId?ProgramaId=6&OrganizacionId=4";
+   console.log("getData iniciado");
 
-         // Realizar la solicitud GET a la API
-         $.ajax({
-            url: apiUrl,
-            type: "GET",
-            dataType: "json",
-            success: function (data) {
-               // Procesar los datos y enviarlos a Tableau
-               doneCallback(data);
-            },
-            error: function (xhr, textStatus, errorThrown) {
-               // Manejar errores
-               console.error("Error en la solicitud:", textStatus, errorThrown);
-               doneCallback([]);
-            }
-         });
-      };
+   // Realizar la solicitud de datos y procesar la respuesta aquí
+   var apiUrl = "https://multicaja-dev.outsystemsenterprise.com/OPPortalCore/rest/V1/EventRiskListByProgramId?ProgramaId=6&OrganizacionId=4";
+
+   // Realizar la solicitud GET a la API
+   $.ajax({
+      url: apiUrl,
+      type: "GET",
+      dataType: "json",
+      success: function (data) {
+         console.log("Datos obtenidos:", data);
+
+         // Procesar los datos y enviarlos a Tableau
+         doneCallback(data);
+      },
+      error: function (xhr, textStatus, errorThrown) {
+         // Manejar errores
+         console.error("Error en la solicitud:", textStatus, errorThrown);
+         doneCallback([]);
+      }
+   });
+};
 
       tableau.registerConnector(myConnector);
 
